@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+/**DETALHES DA DOCUMENTAÇÃO*/
 /*
 MGLT string-- The Maximum number of Megalights this starship can travel in a standard hour. 
 A "Megalight" is a standard unit of distance and has never been defined before within the Star Wars universe. 
@@ -51,7 +52,7 @@ function CalculateStops(){
                 console.log(`-------Uid: ${data.result.uid} Starship: ${data.result.properties.name} mglt: ${data.result.properties.MGLT}-------`);
                 console.log(`Data Trip: distância total ---> ${distanceTripMGLT} MGLT`);
                 console.log(`Data Trip: distância POR DIA ---> ${distancePerDay} MGLT`);
-                console.log(`Data Trip: Precisa parar a cada ---> ${consumables} dias para adquirir consumable`);
+                console.log(`Data Trip: Precisa parar a cada ---> ${consumables} para adquirir consumable`);
                 console.log(`Data Trip: RESULTADO ---> Total de ${daysTotalTrip} dias com ${qtdStops} PARADAS`);
             }           
         }
@@ -60,11 +61,8 @@ function CalculateStops(){
         calculateStops();
 
     },[]);    
-    return(
-        <>
-            <p>olá</p>
-        </>
-        
+    return (
+        <></>
     );
 }
 

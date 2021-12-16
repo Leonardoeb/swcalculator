@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Distance from './pages';
+import Starship from './pages';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Distance />
+    <Starship />
   </React.StrictMode>,
   document.getElementById('root')
 );

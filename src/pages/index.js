@@ -25,6 +25,7 @@ var distanceTripMGLT = 1000000;
 function CalculateStops(){
 
     const [allStarShips, setAllStarships] = useState([]);
+    const [listStarShip, setListStarship] = useState([]);
 
     useEffect(() =>{
 
@@ -36,8 +37,8 @@ function CalculateStops(){
 
         }
 
-        async function calculateStops(){             
-
+        async function fetchDataStarship(){             
+            /*
             for (const starship of allStarShips) {
                 let dataStarship = await fetch('https://www.swapi.tech/api/starships/'.concat(starship.uid));  
                 let data = await dataStarship.json();                
@@ -54,15 +55,53 @@ function CalculateStops(){
                 console.log(`Data Trip: distância POR DIA ---> ${distancePerDay} MGLT`);
                 console.log(`Data Trip: Precisa parar a cada ---> ${consumables} para adquirir consumable`);
                 console.log(`Data Trip: RESULTADO ---> Total de ${daysTotalTrip} dias com ${qtdStops} PARADAS`);
-            }           
+            }  
+            */
+           
+            let dataStarShip = [];
+            for (const starship of allStarShips) {
+                let dataStarship = await fetch('https://www.swapi.tech/api/starships/'.concat(starship.uid));  
+                let data = await dataStarship.json();                
+                dataStarShip.push(data);
+            }
+            setListStarship(dataStarShip);
         }
 
-        fetchAllStarships();   
-        calculateStops();
+        if(allStarShips.length === 0) {
+            fetchAllStarships();
+        }
+        if(listStarShip.length === 0) {
+            fetchDataStarship();
+        }
 
-    },[]);    
+    },[]); 
+    //console.log('Aeros ', allStarShips);
+    //console.log('Data ', listStarShip);
+
+    for (const starShip of listStarShip) {
+
+            let consumables = starShip.result.properties.consumables;
+            let qtdDaysNonStop = calcDaysNonStop(consumables);
+
+            let distancePerDay = starShip.result.properties.MGLT * 24;
+            let daysTotalTrip  = Math.trunc(Number(distanceTripMGLT / distancePerDay));
+            let qtdStops       = daysTotalTrip > qtdDaysNonStop ? Math.trunc(Number(daysTotalTrip/qtdDaysNonStop)) : 0;                
+
+            console.log(`-------Uid: ${starShip.result.uid} Starship: ${starShip.result.properties.name} mglt: ${starShip.result.properties.MGLT}-------`);
+            console.log(`Data Trip: distância total ---> ${distanceTripMGLT} MGLT`);
+            console.log(`Data Trip: distância POR DIA ---> ${distancePerDay} MGLT`);
+            console.log(`Data Trip: Precisa parar a cada ---> ${consumables} para adquirir consumable`);
+            console.log(`Data Trip: RESULTADO ---> Total de ${daysTotalTrip} dias com ${qtdStops} PARADAS`);
+
+    }
+    
+
     return (
-        <>Olá</>
+        <>
+            
+                Olá
+            
+        </>
     );
 }
 

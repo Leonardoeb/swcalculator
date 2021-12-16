@@ -3,8 +3,8 @@
 O cálculo está sendo realizado utilizando alguns dados:
 
 distanceTripMGLT --> Valor da distancia a ser percorrida
-consumables --> retorno do service que informa quantos dias a starship mantem sem parada
-MGLT --> Qual distancia a starchip percorre em um dias
+<p>consumables --> retorno do service que informa quantos dias a starship mantem sem parada
+<p>MGLT --> Qual distancia a starchip percorre em um dias
 
 ## Etapas
 
@@ -19,4 +19,4 @@ https://www.swapi.tech/api/starships/9
 
 ## Install and Start
 npm install
-npm start
+<p>npm start

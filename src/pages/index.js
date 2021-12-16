@@ -98,8 +98,7 @@ function CalculateStops(){
 
     return (
         <>
-            
-                Olá
+           Olá
             
         </>
     );

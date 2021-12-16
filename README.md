@@ -16,3 +16,7 @@ https://www.swapi.tech/api/starships/
 
 https://www.swapi.tech/api/starships/9
 
+
+## Install and Start
+npm install
+npm start

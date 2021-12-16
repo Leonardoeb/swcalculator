@@ -12,7 +12,7 @@ MGLT string-- O número máximo de Megalights que esta nave pode viajar em uma h
 Um "Megalight" é uma unidade padrão de distância e nunca foi definida antes no universo de Star Wars.
 Esta figura só é realmente útil para medir a diferença na velocidade de naves estelares.
 Podemos assumir que é semelhante a UA, a distância entre o nosso Sol (Sol) e a Terra.
-*/
+*/ 
 
 /*
 consumables *string
@@ -45,11 +45,10 @@ function CalculateStops(){
                 let qtdDaysNonStop = calcDaysNonStop(consumables);
 
                 let distancePerDay = data.result.properties.MGLT * 24;
-                let daysTotalTrip  = Number(distanceTripMGLT / distancePerDay).toFixed(0);
+                let daysTotalTrip  = Math.trunc(Number(distanceTripMGLT / distancePerDay));
                 let qtdStops       = daysTotalTrip > qtdDaysNonStop ? Math.trunc(Number(daysTotalTrip/qtdDaysNonStop)) : 0;                
 
                 console.log(`-------Uid: ${data.result.uid} Starship: ${data.result.properties.name} mglt: ${data.result.properties.MGLT}-------`);
-                console.log(`Distance Trip: ${distanceTripMGLT}`);
                 console.log(`Data Trip: distância total ---> ${distanceTripMGLT} MGLT`);
                 console.log(`Data Trip: distância POR DIA ---> ${distancePerDay} MGLT`);
                 console.log(`Data Trip: Precisa parar a cada ---> ${consumables} dias para adquirir consumable`);

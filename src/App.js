@@ -1,10 +1,13 @@
-import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-import AppNave from './pages/index';
+import Conversor from './components/Conversor';
 
 function App() {
   return (
-    <AppNave />
+    <div className="App">
+      <Conversor moedaA="USD" moedaB="BRL" />
+    </div>
   );
 }
 

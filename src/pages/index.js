@@ -24,60 +24,37 @@ var distanceTripMGLT = 1000000;
 
 function CalculateStops(){
 
-    const [allStarShips, setAllStarships] = useState([]);
     const [listStarShip, setListStarship] = useState([]);
 
     useEffect(() =>{
 
         async function fetchAllStarships(){
             
-            let listStarships = await fetch('https://www.swapi.tech/api/starships/');
-            let data = await listStarships.json();
-            setAllStarships(data.results);
+            fetch('https://www.swapi.tech/api/starships/')
+            .then((listStarships) => listStarships.json())
+            .then((json) => {                
+                fetchDataStarship(json);
+            });                    
 
         }
 
-        async function fetchDataStarship(){             
-            /*
-            for (const starship of allStarShips) {
-                let dataStarship = await fetch('https://www.swapi.tech/api/starships/'.concat(starship.uid));  
-                let data = await dataStarship.json();                
-
-                let consumables = data.result.properties.consumables;
-                let qtdDaysNonStop = calcDaysNonStop(consumables);
-
-                let distancePerDay = data.result.properties.MGLT * 24;
-                let daysTotalTrip  = Math.trunc(Number(distanceTripMGLT / distancePerDay));
-                let qtdStops       = daysTotalTrip > qtdDaysNonStop ? Math.trunc(Number(daysTotalTrip/qtdDaysNonStop)) : 0;                
-
-                console.log(`-------Uid: ${data.result.uid} Starship: ${data.result.properties.name} mglt: ${data.result.properties.MGLT}-------`);
-                console.log(`Data Trip: distância total ---> ${distanceTripMGLT} MGLT`);
-                console.log(`Data Trip: distância POR DIA ---> ${distancePerDay} MGLT`);
-                console.log(`Data Trip: Precisa parar a cada ---> ${consumables} para adquirir consumable`);
-                console.log(`Data Trip: RESULTADO ---> Total de ${daysTotalTrip} dias com ${qtdStops} PARADAS`);
-            }  
-            */
+        async function fetchDataStarship(allStarShips){                       
            
             let dataStarShip = [];
-            for (const starship of allStarShips) {
-                let dataStarship = await fetch('https://www.swapi.tech/api/starships/'.concat(starship.uid));  
-                let data = await dataStarship.json();                
-                dataStarShip.push(data);
+            for (const starship of allStarShips.results) {
+                fetch('https://www.swapi.tech/api/starships/'.concat(starship.uid))
+                .then((dataStarShip) => dataStarShip.json())
+                .then((json) => {
+                    dataStarShip.push(json);
+                });                                               
             }
             setListStarship(dataStarShip);
         }
 
-        if(allStarShips.length === 0) {
-            fetchAllStarships();
-        }
-        if(listStarShip.length === 0) {
-            fetchDataStarship();
-        }
-
+        fetchAllStarships();
     },[]); 
-    //console.log('Aeros ', allStarShips);
-    //console.log('Data ', listStarShip);
-
+    
+    
     for (const starShip of listStarShip) {
 
             let consumables = starShip.result.properties.consumables;

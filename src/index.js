@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Starship from './pages';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Starship />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
